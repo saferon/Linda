@@ -9,14 +9,18 @@
 
 import os
 import face_recognition as facerec
-import pickle
 import shutil
 import numpy as np
 from multiprocessing.dummy import Pool
+try:
+    import cPickle as pickle
+except:
+    import pickle
 
-path = '/home/saferon/Documents/fixfix/pics/' # set to your path of unknown pictures
+
+path = '/home/saferon/Documents/fixfix/pics/'  # set to your path of unknown pictures
 Unknown_array = os.listdir(path)
-filesPath = '/home/saferon/Documents/fixfix/' # set to path containing the folders
+filesPath = '/home/saferon/Documents/fixfix/'  # set to path containing the folders
 
 names_and_codes = pickle.load(open('archive', 'rb'))
 print(names_and_codes)
@@ -62,6 +66,7 @@ def sort_images(directory):
                 print("shit match")
 
             print("--------------------------------------------")
+
 
 splite = int(len(Unknown_array))/8
 unknown_split = np.array_split(Unknown_array, splite)

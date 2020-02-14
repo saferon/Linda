@@ -1,15 +1,11 @@
 # TO DO: 1. Get more faces in KNOWN to compare to improve accuracy
 #        2.Write Encodings to file?
 
-# possibly: import face_recognition
-#           image = face_recognition.load_image_file("my_picture.jpg")
-#           face_locations = face_recognition.face_locations(image, model="cnn")
-#           face_locations is now an array listing the co-ordinates of each face
-
 import threading
 import shutil
 import os
 import face_recognition as facerec
+import numpy as np
 try:
     import cPickle as pickle
 except:
@@ -52,6 +48,9 @@ pool = Pool()
 pool.map(pickler, paths)
 pool.close()
 pool.join()
+# slow method without multithreading
+# for pathz in paths:
+#     pickler(pathz)
 
 pickle.dump(names_and_codes, open('archive', 'wb'))
 print("All encodings dumped to pickle!")
